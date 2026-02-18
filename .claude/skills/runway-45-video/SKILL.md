@@ -1,107 +1,172 @@
-# Runway 4.5 Video Prompt Skill (runway-45-video)
-
-## Amaç
-Bu skill, Runway (v4.5) için **copy-paste hazır** video promptları üretir.
-Kullanıcıdan kısa bir brief alır, sonra:
-- Image-to-Video (I2V) için tek prompt
-- İstenirse shot-by-shot (sahne sahne) prompt planı
-- Seamless transitions / scale-shift / match-cut gibi “show” geçişleri
-- “Preserve / Do not change” kuralları ile görsel tutarlılık
-çıktısı verir.
-
-> Not: Konsept açıklamasını Türkçe anlat; asıl prompt metnini İngilizce yaz.
+# Runway Gen-4.5 Video Prompt Skill (runway-45-video)
 
 ---
 
-## Kullanıcıdan İstenecek Bilgi (Checklist)
-Kullanıcıdan şu formatta bilgi iste:
+## Bu Skill Ne İçin? (TR)
+Bu skill, **Runway Gen-4.5** platformuna yapıştırmaya hazır, copy-paste video promptları üretir.
+Tek çekim veya çok sahneli storyboard formatlarını destekler.
+Sinematik, premium, temiz estetik tercih edilir — ucuz VFX yok, abartılı efekt yok.
+Türkçe brief al, İngilizce prompt üret.
 
-1) **PRIMARY** (base / image or video reference)
-- Hangi görsel/video base? (Image 1 / link / kısa tarif)
-- Base’in kadrajı (close-up, medium, full body), kamera yüksekliği, kompozisyon
-
-2) **REFERENCE** (opsiyonel)
-- IDENTITY reference (yüz/saç/vücut)
-- STYLE reference (grain, lens, color grade)
-- OBJECT/PROP reference (eklenecek obje varsa)
-
-3) **GOAL** (tek cümle)
-- Ne değişecek / nasıl bir video hissi?
-- “Scale shift + seamless transitions + show” gibi istekler
-
-4) **PRESERVE (MUST NOT CHANGE)**
-- Değişmeyecek şeyler: mekan, renk paleti, logo yok, yazı yok, kompozisyon sabit vs.
-
-5) **OUTPUT SPECS**
-- Süre: (ör. 5s / 8s / 12s)
-- Aspect ratio: (1:1, 9:16, 16:9)
-- FPS hissi (sinema, 24fps vibe)
-- Stil: clean / filmic / grainy / matte
-
-6) **HARD RULES**
-- No text / no watermark / no extra people
-- No anatomy glitches / no warped geometry
-- Bright/daylight preference (kullanıcı istemedikçe gece yok)
+**Nerede kullanılır:** Runway Gen-4.5 arayüzü — Image-to-Video (I2V) veya Text-to-Video (T2V) kutusuna yapıştır.
 
 ---
 
-## Çıktı Formatı (Runway 4.5)
-### A) Tek “FINAL PROMPT” (I2V için)
-- 1 paragraf İngilizce
-- İçinde mutlaka:
-  - Subject + environment + camera + motion + lighting + texture + transitions
-  - Preserve listesi (do-not-change)
-  - Negative constraints (no text/logos/extra people)
+## Kullanıcıdan İstenecek Minimum Bilgi
 
-### B) Opsiyonel: “SHOT PLAN”
-- 4–6 shot (her biri 1–2s)
-- Her shot: camera move + subject action + transition type
-- En sonda: “Master continuity rules”
+Sadece şu 5 soruyu sor (hepsini tek seferde):
 
----
+1. **Kaynak görsel var mı?** (Image-to-Video mu, Text-to-Video mu?)
+2. **Ana aksiyon / hareket** nedir? (ör. "model yavaşça döner", "kamera yavaş zoom")
+3. **Mood / atmosfer** (ör. premium, melankoli, enerjik, sakin)
+4. **Süre** (ör. 5s / 8s / 10s)
+5. **Aspect ratio** (1:1 / 9:16 / 16:9)
 
-## Master Prompt Template (FINAL)
-Aşağıdaki iskeleti doldurup tek metin halinde ver:
-
-**FINAL PROMPT (paste into Runway v4.5):**
-[PRIMARY] Use the provided base image/video as the exact starting frame and keep the same composition, camera height, lens perspective, and overall color grade.
-[LOOK] Cinematic, photoreal, clean but filmic texture, matte finish, controlled highlights, subtle film grain (as requested). Bright/daylight unless specified otherwise.
-[MOTION] Create premium, smooth motion with intentional camera choreography: micro parallax + gentle push-in/pull-out + subtle handheld stability (very controlled), subject motion remains physically plausible.
-[TRANSITIONS] Add “show” transitions: seamless match-cuts, scale-shifts (macro→wide or wide→macro), and fluid morph transitions that feel continuous and elegant. Transitions must be coherent (no random jump cuts).
-[DETAIL] Preserve material realism: accurate shadows, correct reflections, consistent textures, no flicker. Keep backgrounds stable (no jittering).
-[PRESERVE / DO NOT CHANGE] Do not change identity (unless instructed), do not change outfit (unless instructed), do not add text/logos/watermarks, do not add extra people, do not change location style, do not introduce new major objects, no warped geometry, no extra limbs.
-[OUTPUT] Duration: __ seconds. Aspect ratio: __. Photoreal, high-quality motion, stable framing.
-
-**NEGATIVE (if supported / as constraints):**
-No text, no subtitles, no watermark, no logo, no extra people, no deformed hands, no face melting, no geometry warp, no background shimmer, no noisy flicker, no sudden exposure changes.
+Ekstra soru sorma. Eksik bilgiyi mantıklı default ile doldur.
 
 ---
 
-## Transition Library (kullan)
-Kullanıcının isteğine göre şunlardan seç:
-- **Scale shift**: extreme close-up → medium → wide (tek akışta)
-- **Match cut**: aynı şekil/renk üzerinden kesintisiz geçiş
-- **Seamless morph**: objenin formu akışkan dönüşür ama “aynı sahne” hissi korunur
-- **Whip-pan** (çok kontrollü): hızlı pan ile sahne geçişi
-- **Parallax reveal**: foreground hareket ederken arka plan açılır
+## Çıktı Yapısı
+
+Her üretimde aşağıdaki bölümlerden uygun olanları sun:
+
+- **[A] Single-Shot Prompt** — tek çekim, copy-paste hazır
+- **[B] Image-to-Video (I2V) Prompt** — kaynak görsel varsa
+- **[C] Multi-Scene Storyboard** — 4 sahne, seamless transitions
+- **[D] Negative Prompt / Constraints** — her zaman ekle
 
 ---
 
-## Sık Sorunlar ve Önlem
-- Background jitter/flicker: “Keep background stable, no shimmer, no micro-jitter” ekle
-- Aşırı stilizasyon: “photoreal, real lens, no cartoon look” ekle
-- Kimlik kayması: “identity locked, facial features consistent” ekle
-- Yazı çıkması: “no text of any kind” ekle
+## [A] SINGLE-SHOT PROMPT TEMPLATE
+
+**Kullanım:** Kısa, tek kesimlik video. Kaynak görsel olmadan T2V.
+
+```
+SINGLE-SHOT (Runway Gen-4.5 — paste as prompt):
+
+[SCENE] [Location/environment description]. [Lighting: type, direction, quality]. [Time of day].
+[SUBJECT] [Subject description: clothing, posture, look].
+[ACTION] [What happens: motion, gesture, expression — keep it single and clean].
+[CAMERA] [Lens language: push-in / pull-back / static / slow pan / orbit]. [Speed: very slow / deliberate]. [Framing: close-up / medium / full-body].
+[LOOK] Cinematic, photoreal, premium finish. [Grain: none / subtle / medium]. [Color grade: warm-neutral / cool / desaturated / high contrast]. Matte finish, no lens flare, no gloss.
+[DURATION] __ seconds. [ASPECT RATIO] __.
+
+NEGATIVE: No text, no subtitles, no logos, no watermarks, no extra people, no deformed hands, no warped geometry, no face melting, no background shimmer, no grain flicker, no sudden exposure shifts, no cheesy VFX, no cartoon look.
+```
 
 ---
 
-## Mini Örnek (kısa)
-Kullanıcı: “Bu image’ı videolaştır, show transition, scale shift, seamless”
-Çıktı: yukarıdaki FINAL PROMPT’u duration 6–8s, 1:1 veya 9:16 ile doldur.
+## [B] IMAGE-TO-VIDEO (I2V) PROMPT TEMPLATE
+
+**Kullanım:** Kaynak görsel (Image 1) Runway'e yüklenir, bu metin prompt kutusuna yapıştırılır.
+
+```
+I2V PROMPT (Runway Gen-4.5 — paste alongside uploaded image):
+
+[PRIMARY FRAME] Use the uploaded image as the exact starting frame. Preserve the composition, camera angle, camera height, lens perspective, color grade, and lighting direction precisely throughout.
+[LOOK] [Style: cinematic / analog-matte / editorial-clean]. [Grain level: none / subtle / medium]. Photoreal. No gloss. No specular overblown highlights.
+[ACTION] From this frame: [describe the motion — what moves, how, at what speed]. Motion must feel physically plausible. [Subject action if any].
+[CAMERA] [Move: static / micro push-in / slow pull-back / gentle pan / orbit]. Speed: [very slow / deliberate]. Framing holds at [close-up / medium / full-body] throughout unless scale-shift is requested.
+[SCALE SHIFT — OPTIONAL] Begin at [wide / full-body] → slowly push to [medium / close-up] in a single fluid motion. Maintain film grain and color grade continuously.
+[PRESERVE] Do not change: background/location, color grade, lighting quality, model identity, outfit, framing geometry. Do not add text/logos/objects/extra people.
+[DURATION] __ seconds. [ASPECT RATIO] __.
+
+NEGATIVE: No text, no logos, no watermarks, no extra people, no deformed hands, no face melting, no geometry warp, no background shimmer, no grain flicker, no sudden exposure changes, no cheesy VFX.
+```
+
+---
+
+## [C] MULTI-SCENE STORYBOARD — 4 SCENES (Seamless Transitions)
+
+**Kullanım:** 4 sahneli, birbirine akan video. Her sahne ayrı prompt olarak ya da tek blok olarak kullanılabilir.
+
+```
+STORYBOARD (Runway Gen-4.5 — 4 scenes):
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MASTER CONTINUITY RULES (apply to all scenes):
+- Identity locked: face, hair, body proportions consistent across all scenes.
+- Color grade: consistent [warm-neutral / cool / desaturated] palette — no shift between scenes.
+- Lighting: [daylight / soft ambient / golden hour] — no sudden changes.
+- No text, no logos, no watermarks, no extra people in any scene.
+- Physics-accurate motion. No warped geometry. Stable backgrounds (no shimmer/flicker).
+- Grain level: [none / subtle / medium] — consistent across all scenes.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCENE 1 (__ s):
+[Location]. [Framing: full-body / medium]. [Action: describe clearly in 1 sentence].
+Camera: [static / slow push-in / gentle pan]. Lighting: [type].
+Transition → Scene 2: [MATCH CUT on shape/color | SCALE SHIFT wide→close | SEAMLESS MORPH | SLOW DISSOLVE].
+
+SCENE 2 (__ s):
+[Location — same or new]. [Framing]. [Action].
+Camera: [move]. Lighting: [consistent].
+Transition → Scene 3: [type].
+
+SCENE 3 (__ s):
+[Location]. [Framing]. [Action].
+Camera: [move]. Lighting: [consistent].
+Transition → Scene 4: [type].
+
+SCENE 4 (__ s):
+[Location]. [Framing — can push closer for emphasis]. [Final action / resolution].
+Camera: [slow pull-back / static hold / gentle orbit]. Lighting: [consistent].
+End: hold last frame 0.5s, no hard cut.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL DURATION: __ seconds. ASPECT RATIO: __.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### Transition Library (seç ve yerleştir)
+| Geçiş | Açıklama |
+|---|---|
+| **Match cut** | Aynı şekil/renk/pozisyon üzerinden kesintisiz geçiş |
+| **Scale shift** | Extreme close-up → medium → wide (tek akışta) |
+| **Seamless morph** | Form akışkan değişir ama sahne hissi korunur |
+| **Slow dissolve** | Yumuşak cross-fade, sahneler arasında |
+| **Parallax reveal** | Foreground hareket ederken arka plan açılır |
+| **Whip-pan (controlled)** | Hızlı pan ile sahne geçişi — dikkatli kullan |
+
+---
+
+## [D] NEGATIVE PROMPT / CONSTRAINTS (Her zaman ekle)
+
+```
+NEGATIVE / DO NOT (Runway Gen-4.5):
+No text of any kind. No subtitles. No logos. No watermarks.
+No extra people or characters.
+No deformed hands, no extra fingers, no missing limbs.
+No face melting, no identity drift across frames.
+No warped or impossible geometry.
+No background shimmer, no micro-jitter, no flickering.
+No sudden exposure jumps or color grade shifts.
+No cheesy VFX, no particle explosions, no lens flares.
+No cartoon look, no over-sharpening, no digital gloss.
+No noise or grain flicker (grain must be stable and consistent).
+```
+
+---
+
+## Kamera Dili Referansı (Realistic Camera Language)
+
+| Hareket | Tanım | Ne Zaman |
+|---|---|---|
+| Static hold | Kamera sabit, sadece sahne hareket eder | Güçlü, minimal anlar |
+| Micro push-in | Çok yavaş yaklaşma (zoom değil, dolly hissi) | Intimate, odak artırma |
+| Slow pull-back | Yavaş uzaklaşma, ortam açılır | Reveal, kontekst |
+| Gentle pan | Yatay süpürme, çok kontrollü | Mekan gösterimi |
+| Orbit / arc | Özneyi yavaş dönme | Ürün, karakter tanıtımı |
+| Handheld micro | Çok küçük titreme, canlılık hissi | Editorial, doküman tarzı |
 
 ---
 
 ## Asistanın Davranışı
-- Konsepti Türkçe özetle
-- FINAL PROMPT’u İngilizce ver
-- Gereksiz soru sorma: kullanıcı info eksikse, sadece en kritik 2–3 şeyi sor (PRIMARY + GOAL + duration/aspect).
+- Konsepti Türkçe özetle (1–3 cümle).
+- Uygun template'leri (A/B/C/D) belirle ve doldur.
+- Kullanıcı kaynak görsel belirtmediyse → [A] Single-Shot ver.
+- Kaynak görsel varsa → [B] I2V ver.
+- Storyboard istendiyse → [C] 4-Scene ver.
+- [D] Negative her zaman ekle.
+- Eksik bilgiyi mantıklı default ile doldur. Gereksiz soru sorma.
+- FINAL PROMPT'u İngilizce, copy-paste hazır, tek blok olarak ver.
