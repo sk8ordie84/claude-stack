@@ -262,6 +262,15 @@ If user pastes a prompt and says “fix for kling”:
 
 ---
 
+## KARAKTER LİMİTİ (KRİTİK)
+Kling 3.0 prompt giriş alanı **~2500 karakter** ile sınırlıdır.
+- Her çıktıyı **2300 karakterin altında** tut (güvenli buffer).
+- Gerekirse `wc -c` ile kontrol et.
+- Limit aşılırsa: shot açıklamalarını sıkıştır, tekrar eden kelimeleri kırp, MASTER RULES'u tek satıra indir.
+- Asla NEGATIVE bloğunu silme — kırpılacaksa shot detaylarını kırp.
+
+---
+
 ## SANITY CHECK (before final output)
 Ensure:
 - Shots count + seconds per shot + total duration
@@ -269,4 +278,5 @@ Ensure:
 - Identity lock + continuity
 - No text/logos/watermark
 - Negative block includes: no flicker, no warp, no background shimmer, no deformed anatomy
+- **Toplam karakter sayısı 2300'ün altında**
 If missing, add it silently.
