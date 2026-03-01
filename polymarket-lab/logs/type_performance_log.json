@@ -1,0 +1,35 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-03-01T22:31:06.112238Z",
+      "markets_tested": 27,
+      "type_summary": {
+        "lower_mid": {
+          "count": 9,
+          "total_net_pnl_usd": -44.7502,
+          "avg_net_pnl_usd": -4.9722,
+          "win_rate": 0.222
+        },
+        "mid_range": {
+          "count": 18,
+          "total_net_pnl_usd": -7.8838,
+          "avg_net_pnl_usd": -0.438,
+          "win_rate": 0.556
+        }
+      }
+    }
+  ],
+  "aggregate_comparison": {
+    "mid_range": {
+      "n_samples": 18,
+      "avg_net_pnl_usd": -0.438,
+      "win_rate": 0.0
+    },
+    "lower_mid": {
+      "n_samples": 9,
+      "avg_net_pnl_usd": -4.9722,
+      "win_rate": 0.0
+    },
+    "note": "Sample size is small until many runs are logged. Do not treat these averages as validated edge."
+  }
+}

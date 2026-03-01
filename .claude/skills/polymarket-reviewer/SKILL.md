@@ -24,11 +24,11 @@ The goal is to identify:
 
 ## Files to review
 When available, inspect:
-- `../polymarket-lab/logs/diverse_shortlist.json`
-- `../polymarket-lab/logs/paper_trade_batch_*.json`
-- `../polymarket-lab/logs/paper_trade_batch_net_*.json`
-- `../polymarket-lab/logs/paper_trade_batch_filtered_*.json`
-- `../polymarket-lab/journal.md`
+- `./polymarket-lab/logs/diverse_shortlist.json`
+- `./polymarket-lab/logs/paper_trade_batch_net.json`
+- `./polymarket-lab/logs/paper_trade_batch_filtered.json`
+- `./polymarket-lab/logs/type_performance_log.json`
+- `./polymarket-lab/journal.md`
 
 If exact file access is not available, ask the user to paste the latest outputs.
 
