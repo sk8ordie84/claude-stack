@@ -1,287 +1,279 @@
 ---
 name: kling-30-video
-description: Create copy-paste ready Kling 3.0 video prompts including single-shot, multishot, product ad, and fashion walk formats with continuity and negative controls.
+description: Create copy-paste ready Kling 3.0 video prompts in both single-shot and multishot modes, with strong continuity, negative controls, and premium cinematic direction.
 ---
 
-# Kling 3.0 Video Prompt Skill (kling-30-video)
+# Kling 3.0 Video Prompt Skill
 
----
+## Purpose
+This skill creates **copy-paste ready Kling 3.0 prompts** for:
+- single-shot cinematic video prompts
+- multishot / 5-shot structured prompts
+- fashion editorial motion
+- product ad motion
+- short narrative progression
 
-## Bu Skill Ne İçin? (TR)
-Bu skill, **Kling 3.0** platformuna yapıştırmaya hazır, copy-paste video promptları üretir.
-Tek çekim, 5-shot çok sahneli, ürün reklamı ve moda editöryal olmak üzere 4 farklı format destekler.
-Kimlik kilidi, kamera sürekliliği, ışık tutarlılığı ve sıkı negatif kurallar her çıktıda standart olarak gelir.
-Türkçe brief al, İngilizce prompt üret.
-
-**Nerede kullanılır:** Kling 3.0 arayüzü — prompt kutusuna yapıştır. I2V için görsel yükle, T2V için sadece metni kullan.
-
----
-
-## Kullanıcıdan İstenecek Minimum Bilgi
-
-Sadece şu 5 soruyu sor (hepsini tek seferde):
-
-1. **Kaç shot / sahne?** (ör. single / 5-shot / özel sayı)
-2. **Toplam süre ve sahne başına süre** (ör. 15s toplam / sahne başı 3s)
-3. **Aspect ratio** (1:1 / 9:16 / 16:9)
-4. **Referans görseller var mı?** (identity ref / style ref / product ref)
-5. **Hareket tipi** (ör. yürüyüş, turn, product reveal, sakin editorial, aksiyon)
-
-Ekstra soru sorma. Eksik bilgiyi mantıklı default ile doldur.
+Write a **short Turkish explanation first**, then give the **final prompt in English**.
 
 ---
 
-## Çıktı Yapısı
+## Mode selection
 
-Kullanıcının isteğine göre uygun formatı seç:
+This skill supports 2 modes:
 
-- **[A] Single-Shot** — tek çekim, kısa ve güçlü
-- **[B] 5-Shot Multishot** — 5 sahne x 3s, sinematik kurgu
-- **[C] Product Ad Style** — ürün odaklı, macro→hero→lifestyle
-- **[D] Fashion Editorial Walk Cycle** — moda editöryal yürüyüş döngüsü
+### 1) Single-shot mode (default)
+Use this by default unless the user explicitly asks for multishot.
 
-Her formata **MASTER CONTINUITY RULES** ve **NEGATIVE** ekle.
+Use single-shot mode for:
+- one strong cinematic scene
+- one continuous shot
+- one visual idea expanded into the best possible single video moment
+- image-to-video with one clear motion concept
+- premium fashion/editorial motion from one image
+- one hero movement, not a sequence
 
----
+Output in single-shot mode:
+- short Turkish explanation
+- one FINAL PROMPT in English
+- one NEGATIVE block
+- no shot list
 
-## [A] SINGLE-SHOT PROMPT TEMPLATE
+### 2) Multishot mode
+Only use this when the user explicitly asks for:
+- multishot
+- 5-shot
+- storyboard
+- multiple scenes
+- progression
+- sequence
+- narrative structure
+- product ad sequence
+- fashion progression across shots
 
-**Kullanım:** Kısa, güçlü tek çekim. T2V veya I2V.
+Output in multishot mode:
+- MASTER CONTINUITY RULES
+- SHOT LIST
+- NEGATIVE
+- OUTPUT
 
-```
-SINGLE-SHOT (Kling 3.0 — paste as prompt):
-
-MASTER RULES: Photoreal, real-lens look. Identity locked (face/hair/body consistent). Lighting: [daylight / soft ambient] — bright, controlled contrast, no night unless requested. No text, no logos, no watermarks, no extra people. Physics-accurate motion. No warped geometry. Stable background (no shimmer/flicker).
-
-SCENE (__ s):
-[Location]. [Framing: full-body / medium / close-up]. [Time of day / lighting].
-Subject: [description — clothing, posture, look].
-Action: [single, clear action in 1 sentence].
-Camera: [static / micro push-in / slow pan / gentle orbit]. Speed: [very slow / deliberate].
-Look: [cinematic / editorial-clean / analog-matte]. Grain: [none / subtle / medium]. Color grade: [warm-neutral / cool / desaturated].
-
-ASPECT RATIO: __. DURATION: __ seconds.
-
-NEGATIVE: No text, no subtitles, no logos, no watermarks, no extra people, no deformed hands, no extra fingers, no face melting, no warped geometry, no background shimmer, no flickering, no grain flicker, no sudden exposure changes, no cheesy VFX.
-```
-
----
-
-## [B] 5-SHOT MULTISHOT (3s each = 15s total)
-
-**Kullanım:** 5 sahne, her biri 3 saniye, seamless kurgu. Fashion, lifestyle, heist, editorial için.
-
-```
-MULTISHOT (Kling 3.0 — 5 scenes x 3s):
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MASTER CONTINUITY RULES (apply to ALL scenes):
-- Identity locked: face, hair, body proportions, outfit — consistent across all 5 shots.
-- Color grade: single cohesive palette [warm-neutral / cool / desaturated] — no shift between scenes.
-- Lighting: [daylight / soft ambient / golden hour] — consistent, bright, no sudden changes.
-- No text, no subtitles, no logos, no watermarks in any scene.
-- No extra people unless explicitly requested.
-- Physics-accurate motion. No warped geometry. No extra limbs.
-- Stable backgrounds — no shimmer, no micro-jitter, no flickering.
-- Grain: [none / subtle / medium] — consistent and stable across all scenes.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-SHOT 1 (3s):
-[Location]. [Framing: full-body]. [Action].
-Camera: [static / slow push-in]. Lighting: [type].
-Transition → Shot 2: [MATCH CUT / SCALE SHIFT / SEAMLESS MORPH / SLOW DISSOLVE].
-
-SHOT 2 (3s):
-[Location — same or new]. [Framing]. [Action].
-Camera: [move]. Lighting: consistent.
-Transition → Shot 3: [type].
-
-SHOT 3 (3s):
-[Location]. [Framing]. [Action].
-Camera: [move]. Lighting: consistent.
-Transition → Shot 4: [type].
-
-SHOT 4 (3s):
-[Location]. [Framing]. [Action].
-Camera: [move]. Lighting: consistent.
-Transition → Shot 5: [type].
-
-SHOT 5 (3s):
-[Location]. [Framing — push closer for impact]. [Final action / hold].
-Camera: [slow pull-back / static hold]. Lighting: consistent.
-End: hold final frame 0.5s. No hard cut.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL: 15 seconds. ASPECT RATIO: __.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NEGATIVE: No text, no subtitles, no logos, no watermarks, no extra people, no deformed hands, no extra fingers, no face melting, no identity drift, no warped geometry, no background shimmer, no flickering, no grain flicker, no sudden exposure changes, no cheesy VFX, no cartoon look.
-```
+## Default behavior
+If the user does not specify the mode:
+- default to SINGLE-SHOT mode
 
 ---
 
-## [C] PRODUCT AD STYLE
+## User inputs to infer or ask for only if needed
+If the user has already provided enough context, do not ask again.
 
-**Kullanım:** Ürün odaklı video. Macro detay → hero shot → lifestyle kontekst. Temiz, premium estetik.
+Only ask minimal questions if absolutely necessary:
+1. Duration
+2. Aspect ratio
+3. Single-shot or multishot (only if unclear and important)
 
-```
-PRODUCT AD (Kling 3.0 — 3-beat structure):
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MASTER CONTINUITY RULES:
-- Product identity locked: shape, color, texture, branding consistent across all beats.
-- Color grade: clean, premium [warm-neutral / cool / brand-matched]. Consistent.
-- Lighting: controlled studio-like or natural daylight. No harsh shadows. Accurate reflections on glass/metal/surfaces.
-- No text, no subtitles, no logos added (product's own design only).
-- Physics-accurate. No warped geometry. Stable background.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-BEAT 1 — MACRO DETAIL (__ s):
-Extreme close-up of [product detail: texture / material / logo / feature].
-Camera: very slow push-in or micro-orbit. Lighting: [raking light / soft diffused].
-Transition → Beat 2: SCALE SHIFT (macro→hero).
-
-BEAT 2 — HERO SHOT (__ s):
-[Product] centered on [surface/background]. Full product visible. Clean and crisp.
-Camera: [slow orbit / static hold / gentle pull-back]. Lighting: [clean, highlights controlled].
-Transition → Beat 3: SLOW DISSOLVE or MATCH CUT.
-
-BEAT 3 — LIFESTYLE CONTEXT (__ s):
-[Product] in use or displayed in [real environment / hands / lifestyle scene].
-Camera: [medium framing / gentle pan]. Subject (if any): natural, unposed feel.
-End: hold 0.5s on product.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL: __ seconds. ASPECT RATIO: __.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NEGATIVE: No text, no subtitles, no added logos, no extra people, no deformed hands, no warped geometry, no background shimmer, no flickering, no sudden exposure changes, no over-saturated colors, no lens flare, no cheesy VFX.
-```
+If missing, use defaults:
+- duration: 6s for single-shot
+- duration: 15s for multishot (5 shots × 3s)
+- aspect ratio: 1:1
+- look: photoreal, premium, stable, no cheesy effects
 
 ---
 
-## [D] FASHION EDITORIAL WALK CYCLE
+## Global rules
 
-**Kullanım:** Moda editöryal — yürüyüş, dönüş, kumaş hareketi. Premium, sinematik his.
+Always prefer:
+- photoreal
+- premium editorial finish
+- real camera language
+- stable geometry
+- coherent motion
+- identity consistency
+- clean lighting continuity
+- physically plausible movement
 
-```
-FASHION EDITORIAL WALK CYCLE (Kling 3.0):
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MASTER CONTINUITY RULES:
-- Identity locked: face, hair, body proportions consistent. Wardrobe locked (outfit unchanged throughout).
-- Color grade: editorial [warm-neutral / matte-cool / film-analog]. Consistent.
-- Lighting: [soft daylight / diffused ambient / golden rim light]. No harsh shadows. No overblown highlights.
-- No text, no subtitles, no logos, no watermarks.
-- No extra people.
-- Physics-accurate fabric drape — cloth must move naturally, no stiff CG look.
-- Stable background — no shimmer, no flicker.
-- Grain: [none / subtle / medium] — consistent.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-BEAT 1 — APPROACH WALK (__ s):
-[Location]. Full-body framing. Model walks toward camera at a premium, deliberate pace.
-Fabric in motion: [describe key garment movement — coat flowing / skirt swaying / sleeves trailing].
-Camera: very slow push-in to meet subject. Lighting: [soft front / side].
-Transition → Beat 2: SCALE SHIFT (full-body → medium).
-
-BEAT 2 — TURN / PAUSE (__ s):
-Medium framing. Model executes a slow, controlled turn or stops with intention.
-Detail focus: [fabric fall / accessory / silhouette edge].
-Camera: gentle orbit or static hold. Lighting: consistent.
-Transition → Beat 3: MATCH CUT on posture or silhouette.
-
-BEAT 3 — WALK AWAY / PROFILE (__ s):
-Full-body or medium. Model walks away or passes camera in profile.
-Fabric trailing. Natural weight shift visible.
-Camera: [slow pan to follow / static let subject pass]. Lighting: consistent.
-End: hold on empty frame or freeze silhouette 0.5s.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL: __ seconds. ASPECT RATIO: __.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NEGATIVE: No text, no subtitles, no logos, no watermarks, no extra people, no deformed hands, no extra fingers, no stiff CG fabric, no face melting, no identity drift, no warped geometry, no background shimmer, no flickering, no grain flicker, no sudden exposure changes, no cartoon look.
-```
+Always avoid:
+- text
+- subtitles
+- logos
+- watermark
+- flicker
+- warped geometry
+- melted faces
+- duplicated limbs
+- background shimmer
+- random exposure changes
+- cheap or cartoonish effects
 
 ---
 
-## Strict Control Kuralları (Her Formatta Geçerli)
+## Output format
 
-| Kural | Açıklama |
-|---|---|
-| **Identity lock** | Yüz, saç, vücut oranları tüm sahnelerde sabit |
-| **Kamera sürekliliği** | Lens dili ve hız sahne değişimlerinde tutarlı |
-| **Işık tutarlılığı** | Renk sıcaklığı ve yön tüm sahnelerde aynı |
-| **No flicker** | Grain, exposure, arka plan — hiçbiri titremez |
-| **No geometry warp** | Uzuv, yüz, arka plan geometrisi bozulmaz |
-| **No subtitles/logos** | Hiçbir sahneye yazı veya marka eklenmez |
+Always output in this order:
 
----
+### A) Short Turkish explanation
+Write 2–5 short lines in Turkish:
+- which mode you selected
+- why
+- what kind of motion/camera language you chose
 
-## Transition Library (seç ve yerleştir)
+### B) Final prompt in English
+- if single-shot: one FINAL PROMPT block
+- if multishot: MASTER CONTINUITY RULES + SHOT LIST + NEGATIVE + OUTPUT
 
-| Geçiş | Açıklama |
-|---|---|
-| **Match cut** | Aynı şekil/renk/pozisyon üzerinden kesintisiz |
-| **Scale shift** | Macro → medium → wide (tek akışta) |
-| **Seamless morph** | Form değişir ama sahne hissi korunur |
-| **Slow dissolve** | Yumuşak cross-fade |
-| **Parallax reveal** | Foreground hareket, arka plan açılır |
-| **Whip-pan (controlled)** | Hızlı pan — dikkatli kullan, abartma |
+### C) Negative / constraints
+Always include negative constraints.
 
 ---
 
-## Asistanın Davranışı
-- Konsepti Türkçe özetle (1–3 cümle).
-- Kullanıcının isteğine göre [A] / [B] / [C] / [D] formatını seç.
-- MASTER CONTINUITY RULES ve NEGATIVE her zaman ekle.
-- Eksik bilgiyi mantıklı default ile doldur. Gereksiz soru sorma.
-- FINAL PROMPT'u İngilizce, copy-paste hazır, tek blok olarak ver.
----
+## Kling single-shot template
 
-## AUTO-CREATIVE MODE (if user gives only an image or says “kling”)
-If the user provides no story/goal:
-- Generate 3 variants A/B/C as **5-shot multishot** (3s each)
-- Each includes: MASTER RULES + SHOT LIST + NEGATIVE + OUTPUT
-- Keep it coherent, cause→effect, premium realism.
+Use this structure when the user wants a single-shot Kling prompt:
 
-### Default A/B/C story structures
-- A: Editorial progression (establish → scale shift → detail → hero → resolve)
-- B: Jet-set micro narrative (arrive → reveal → twist → payoff → exit)
-- C: Product-led (macro detail → handling → lifestyle → hero → clean endframe)
+**FINAL PROMPT**
+Create a single, visually strong cinematic shot based on the provided image or concept. Keep the result photoreal, premium, stable, and coherent. Use one clear camera move only, such as a slow push-in, a subtle orbit, a gentle lateral slide, or a controlled pull-back. Preserve identity, outfit, textures, and environment unless explicitly instructed otherwise. Motion must feel intentional, physically plausible, and visually rich without turning into a multishot sequence. Keep lighting continuity clean and realistic. No text, no logos, no watermark, no extra people, no flicker, no warped geometry, and no unstable background motion.
+
+**NEGATIVE**
+No text, no subtitles, no logos, no watermark, no extra people, no face distortion, no anatomy errors, no extra limbs, no flicker, no geometry warps, no background shimmer, no random stylistic jumps.
 
 ---
 
-## PROMPT FIX MODE
-If user pastes a prompt and says “fix for kling”:
-- Output **FINAL** in Kling format: MASTER RULES + SHOT LIST + NEGATIVE + OUTPUT
-- Keep intent unchanged, only add missing structure/specs
+## Kling multishot template
+
+Use this structure when the user explicitly wants multishot:
+
+**MASTER CONTINUITY RULES**
+Photoreal, premium editorial realism, identity locked, lighting continuity, consistent lens feel, no text/logos/watermarks, no extra people unless requested, no flicker, no warped geometry, no face drift, no unstable backgrounds.
+
+**SHOT LIST**
+Scene 1 (__s): [Location]. [Framing]. [Action]. Camera: [move]. Lighting: [style]. Transition: [type].
+Scene 2 (__s): [Location]. [Framing]. [Action]. Camera: [move]. Lighting: [style]. Transition: [type].
+Scene 3 (__s): [Location]. [Framing]. [Action]. Camera: [move]. Lighting: [style]. Transition: [type].
+Scene 4 (__s): [Location]. [Framing]. [Action]. Camera: [move]. Lighting: [style]. Transition: [type].
+Scene 5 (__s): [Location]. [Framing]. [Action]. Camera: [move]. Lighting: [style]. Transition: [type].
+
+**NEGATIVE**
+No text, no logo, no watermark, no face melting, no anatomy errors, no extra limbs, no flicker, no geometry warps, no random stylistic jumps.
+
+**OUTPUT**
+Total duration: __
+Aspect ratio: __
 
 ---
 
-## PRESETS (quick start)
-- Preset 1: 5-shot fashion editorial (walk cycle, turn, fabric motion), daylight, matte film grain
-- Preset 2: 5-shot product ad (macro → hero → lifestyle), controlled reflections, no flicker
-- Preset 3: 5-shot “show” transitions (match cut / scale shift / parallax reveal), stable geometry
+## Preset behavior
+
+If user mentions:
+
+### showtime
+- prefer elegant transition logic
+- prefer single-shot unless multishot is explicitly requested
+- use premium reveal motion, subtle scale-feel, polished camera language
+
+### guyritchie
+- prefer multishot
+- use 5-shot progression
+- stronger sequencing and punchier structure
+
+### fashionwalk
+- default to single-shot if one image / one scene
+- use multishot only if explicitly requested
+- subject walk, turn, fabric movement, cool confidence
+
+### productad
+- use single-shot for one hero move
+- use multishot for macro → hero → lifestyle sequence
+- premium commercial polish
+
+### dreamy
+- softer motion
+- atmospheric camera behavior
+- gentle light bloom
+- still realistic, no fantasy drift
+
+### darkluxury
+- richer contrast
+- moody but premium
+- controlled highlights
+- no crushed blacks
+- no cheap cyberpunk look
 
 ---
 
-## KARAKTER LİMİTİ (KRİTİK)
-Kling 3.0 prompt giriş alanı **~2500 karakter** ile sınırlıdır.
-- Her çıktıyı **2300 karakterin altında** tut (güvenli buffer).
-- Gerekirse `wc -c` ile kontrol et.
-- Limit aşılırsa: shot açıklamalarını sıkıştır, tekrar eden kelimeleri kırp, MASTER RULES'u tek satıra indir.
-- Asla NEGATIVE bloğunu silme — kırpılacaksa shot detaylarını kırp.
+## Auto-creative behavior
+
+If the user gives very little information, automatically generate:
+
+### Variant A — Premium / Elegant
+- safest and most premium version
+- subtle camera move
+- stable realism
+
+### Variant B — More Creative
+- stronger motion language
+- richer visual idea
+- still coherent and premium
+
+### Variant C — Slightly Bolder
+- more dynamic movement
+- stronger rhythm
+- still realistic and usable
+
+For each variant include:
+- selected mode
+- why that mode is best
+- final prompt
+- negative constraints
 
 ---
 
-## SANITY CHECK (before final output)
-Ensure:
-- Shots count + seconds per shot + total duration
-- Aspect ratio
-- Identity lock + continuity
-- No text/logos/watermark
-- Negative block includes: no flicker, no warp, no background shimmer, no deformed anatomy
-- **Toplam karakter sayısı 2300'ün altında**
-If missing, add it silently.
+## Prompt-fix mode
+
+If the user pastes an existing Kling prompt:
+- do not rewrite from zero unless necessary
+- preserve the intent
+- tighten the language
+- add missing structure
+- add negatives
+- add continuity rules
+- convert it into either:
+  - single-shot final prompt
+  - or multishot final structure
+depending on the user’s intent
+
+---
+
+## Fast-path examples
+
+### Example 1
+User uploads one image and writes:
+“kling”
+
+You should:
+- default to SINGLE-SHOT mode
+- generate the best one-scene Kling prompt
+- use strong defaults
+
+### Example 2
+User writes:
+“kling 5-shot jetset story”
+
+You should:
+- use MULTISHOT mode
+- create a 5-shot structure
+
+### Example 3
+User writes:
+“fix this for kling”
+
+You should:
+- repair the prompt
+- output only the improved Kling result
+
+---
+
+## Most important rule
+Optimize for speed and usefulness.
+
+If enough context exists:
+- do not ask unnecessary questions
+- default to SINGLE-SHOT mode
+- generate a strong, production-ready Kling prompt immediately
