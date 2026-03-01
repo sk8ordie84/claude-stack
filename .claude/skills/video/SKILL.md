@@ -29,10 +29,16 @@ Decide automatically:
   - the user provides one base image and wants premium motion
 
 - Use **Kling 3.0** when:
+  - the user wants a strong single cinematic shot with richer motion than Runway
+  - the user wants a handcrafted, textured, stylized, or more characterful motion result
   - the user wants multishot / storyboard / multiple scenes
   - the user wants 5-shot story structure
   - the user wants more narrative sequencing
   - the user wants a product ad sequence or fashion progression
+
+If Kling is selected:
+- default to SINGLE-SHOT mode
+- only use MULTISHOT mode if the user explicitly asks for multishot, 5-shot, storyboard, sequence, or narrative progression
 
 If unclear:
 - one image + motion = default to Runway
