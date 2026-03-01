@@ -1,3 +1,8 @@
+---
+name: video-prompt-fixer
+description: Fix weak or broken video prompts using sanity checks, continuity rules, camera corrections, and stronger negative constraints.
+---
+
 # Video Prompt Fixer (video-prompt-fixer)
 
 ## Amaç

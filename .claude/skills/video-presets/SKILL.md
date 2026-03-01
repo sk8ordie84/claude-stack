@@ -1,3 +1,8 @@
+---
+name: video-presets
+description: Apply reusable preset structures for video prompt creation including camera language, motion style, continuity, and output defaults.
+---
+
 # video-presets
 
 Amaç: Runway Gen-4.5 ve Kling 3.0 için tekrar eden "show" presetlerini tek yerden yönetmek.

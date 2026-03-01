@@ -1,3 +1,8 @@
+---
+name: runway-45-video
+description: Create copy-paste ready Runway Gen-4.5 video prompts for single-shot, image-to-video, storyboard, and cinematic transitions with continuity and camera rules.
+---
+
 # Runway Gen-4.5 Video Prompt Skill (runway-45-video)
 
 ---

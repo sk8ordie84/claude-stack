@@ -1,3 +1,8 @@
+---
+name: video-exporter
+description: Prepare finalized export-ready video prompt outputs and delivery formats for different platforms and production flows.
+---
+
 # video-exporter
 
 Girdi: "Final master prompt" + (platform, duration, ratio, preset, negatives)

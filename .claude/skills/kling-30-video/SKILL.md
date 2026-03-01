@@ -1,3 +1,8 @@
+---
+name: kling-30-video
+description: Create copy-paste ready Kling 3.0 video prompts including single-shot, multishot, product ad, and fashion walk formats with continuity and negative controls.
+---
+
 # Kling 3.0 Video Prompt Skill (kling-30-video)
 
 ---

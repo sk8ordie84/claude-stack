@@ -1,3 +1,8 @@
+---
+name: video-router
+description: Route a video request to the correct workflow and format, choosing between Runway, Kling, or other matching prompt structures.
+---
+
 # Video Router Skill (video-router)
 
 ## Amaç
