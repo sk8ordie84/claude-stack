@@ -4,37 +4,37 @@ import { Reveal, FadeRule, StaggerContainer, StaggerItem } from "@/lib/animation
 
 const capabilities = [
   {
-    icon: "◆",
+    index: "01",
     title: "Anomaly Detection",
     description:
       "Surfaces statistical anomalies across prediction markets — price movements, volume spikes, and structural shifts that deviate from baseline behavior.",
   },
   {
-    icon: "◇",
+    index: "02",
     title: "Signal Lifecycle",
     description:
       "Tracks every signal from emergence through confirmation or decay. You see the full trajectory — building, confirmed, conflicted, or dissolved.",
   },
   {
-    icon: "▸",
+    index: "03",
     title: "Operator Framing",
     description:
       "Reframes raw market data into operator-relevant intelligence. Not what the market says — what an operator needs to know.",
   },
   {
-    icon: "◌",
+    index: "04",
     title: "Calibration & Validation",
     description:
       "Continuous measurement against resolved outcomes. The system knows its own accuracy — and shows you where it has been right and wrong.",
   },
   {
-    icon: "⬡",
+    index: "05",
     title: "Multi-Perspective Analysis",
     description:
       "Market-level, event-level, and observation-level views. Zoom between macro structure and micro signal with coherent attribution.",
   },
   {
-    icon: "◈",
+    index: "06",
     title: "Event Graph Intelligence",
     description:
       "Maps relationships between events, clusters correlated predictions, and surfaces hidden dependencies that single-market views miss.",
@@ -43,78 +43,75 @@ const capabilities = [
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="relative py-32 md:py-48 bg-juju-charcoal/30">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
+    <section id="capabilities" className="relative py-32 md:py-48">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
         <FadeRule className="mb-24" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24 mb-20">
-          {/* Left column - header */}
-          <div className="lg:col-span-1">
-            <Reveal>
-              <span className="text-xs font-mono tracking-[0.3em] text-juju-signal/70 uppercase mb-6 block">
-                Capabilities
-              </span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-serif text-4xl md:text-5xl text-juju-pure leading-[1.1] mb-6">
-                What the system sees.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="text-sm text-juju-gray leading-relaxed">
-                Six integrated intelligence capabilities.
-                Each one validated, each one transparent in its methods.
-              </p>
-            </Reveal>
-          </div>
-
-          {/* Right column - capabilities grid */}
-          <div className="lg:col-span-2">
-            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-px bg-juju-border" staggerDelay={0.08}>
-              {capabilities.map((cap) => (
-                <StaggerItem key={cap.title}>
-                  <div className="bg-juju-black p-8 md:p-10 h-full group hover:bg-juju-dark/80 transition-colors duration-500">
-                    <div className="flex items-start gap-4 mb-4">
-                      <span className="text-juju-signal/40 text-lg font-light mt-0.5 group-hover:text-juju-signal/70 transition-colors duration-500">
-                        {cap.icon}
-                      </span>
-                      <h3 className="font-serif text-xl text-juju-light tracking-tight">
-                        {cap.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-juju-gray leading-relaxed pl-8">
-                      {cap.description}
-                    </p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
+        {/* Section header */}
+        <div className="max-w-2xl mb-20">
+          <Reveal>
+            <span className="font-mono text-[10px] tracking-[0.3em] text-juju-gray uppercase mb-8 block">
+              Capabilities Index
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="font-display text-4xl md:text-5xl text-juju-pure leading-[1.1] font-light mb-6">
+              What the system sees.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-sm text-juju-gray leading-relaxed font-light">
+              Six integrated intelligence capabilities.
+              Each one validated, each one transparent in its methods.
+            </p>
+          </Reveal>
         </div>
 
-        {/* Actionable vs Watch separator */}
-        <Reveal>
-          <div className="mt-16 border border-juju-border bg-juju-dark/30 p-8 md:p-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 bg-juju-signal" />
-                  <span className="font-mono text-xs tracking-[0.2em] text-juju-signal/80">ACTIONABLE</span>
-                </div>
-                <p className="text-sm text-juju-light leading-relaxed">
-                  Confirmed signal with sufficient depth, calibration history,
-                  and structural support. The system has earned the right to surface this.
+        {/* Index list */}
+        <StaggerContainer className="max-w-4xl" staggerDelay={0.06}>
+          {capabilities.map((cap) => (
+            <StaggerItem key={cap.index}>
+              <div className="group grid grid-cols-[3rem_1fr] md:grid-cols-[3rem_200px_1fr] gap-4 py-7 border-b border-juju-border/60 hover:border-juju-border transition-colors duration-500">
+                <span className="font-mono text-[10px] text-juju-muted tracking-wider pt-1">
+                  {cap.index}
+                </span>
+                <h3 className="font-display text-xl text-juju-light font-normal tracking-tight group-hover:text-juju-pure transition-colors duration-500">
+                  {cap.title}
+                </h3>
+                <p className="text-sm text-juju-gray leading-relaxed font-light col-start-2 md:col-start-3">
+                  {cap.description}
                 </p>
               </div>
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 bg-juju-caution" />
-                  <span className="font-mono text-xs tracking-[0.2em] text-juju-caution/80">WATCH</span>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* Signal classification key */}
+        <Reveal>
+          <div className="mt-20 max-w-4xl">
+            <p className="font-mono text-[9px] tracking-[0.25em] text-juju-gray uppercase mb-8">
+              Signal Classification Key
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="flex items-start gap-4">
+                <div className="w-1 h-full min-h-[3rem] bg-juju-signal/40 mt-1 shrink-0" />
+                <div>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-juju-signal/70 uppercase block mb-2">Actionable</span>
+                  <p className="text-sm text-juju-light leading-relaxed font-light">
+                    Confirmed signal with sufficient depth, calibration history,
+                    and structural support.
+                  </p>
                 </div>
-                <p className="text-sm text-juju-light leading-relaxed">
-                  Signal detected but unconfirmed. The case is building, depth is
-                  insufficient, or the read is conflicted. Not silence — structured patience.
-                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-1 h-full min-h-[3rem] bg-juju-caution/40 mt-1 shrink-0" />
+                <div>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-juju-caution/70 uppercase block mb-2">Watch</span>
+                  <p className="text-sm text-juju-light leading-relaxed font-light">
+                    Signal detected but unconfirmed. The case is building,
+                    depth is insufficient, or the read is conflicted.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

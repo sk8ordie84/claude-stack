@@ -31,25 +31,25 @@ const comparisons = [
 
 export default function WhyDifferent() {
   return (
-    <section className="relative py-32 md:py-48">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
+    <section className="relative paper-section paper-texture">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12 py-32 md:py-48">
         <FadeRule className="mb-24" />
 
-        <div className="max-w-3xl mb-20">
+        <div className="max-w-2xl mb-20">
           <Reveal>
-            <span className="text-xs font-mono tracking-[0.3em] text-juju-signal/70 uppercase mb-6 block">
-              Differentiation
+            <span className="font-mono text-[10px] tracking-[0.3em] text-juju-ink-muted uppercase mb-8 block">
+              Differentiation &middot; Comparison Sheet
             </span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-juju-pure leading-[1.05] mb-8">
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-juju-ink leading-[1.05] font-light mb-8">
               Most tools sell confidence.
               <br />
-              <span className="text-juju-silver italic">We measure it.</span>
+              <em className="font-serif text-juju-ink-light">We measure it.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-lg text-juju-gray leading-relaxed max-w-xl">
+            <p className="text-base text-juju-ink-muted leading-relaxed max-w-lg font-light">
               The market is full of tools that perform certainty.
               JUJU LAB is built for operators who know that honest
               uncertainty is the only defensible foundation.
@@ -58,33 +58,27 @@ export default function WhyDifferent() {
         </div>
 
         {/* Comparison table */}
-        <div className="border border-juju-border">
+        <div className="max-w-4xl">
           {/* Header */}
-          <div className="grid grid-cols-2 border-b border-juju-border">
-            <div className="p-4 md:p-6 bg-juju-dark/30">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-juju-gray uppercase">
-                Prediction Theater
-              </span>
-            </div>
-            <div className="p-4 md:p-6 bg-juju-charcoal/30">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-juju-signal/60 uppercase">
-                JUJU LAB
-              </span>
-            </div>
+          <div className="grid grid-cols-2 pb-4 border-b border-juju-ink/10 mb-2">
+            <span className="font-mono text-[9px] tracking-[0.2em] text-juju-ink-muted/50 uppercase">
+              Prediction Theater
+            </span>
+            <span className="font-mono text-[9px] tracking-[0.2em] text-juju-ink-muted uppercase">
+              JUJU LAB
+            </span>
           </div>
 
           {/* Rows */}
           {comparisons.map((row, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <div className="grid grid-cols-2 border-b border-juju-border/50 last:border-b-0 group hover:bg-juju-charcoal/20 transition-colors duration-300">
-                <div className="p-4 md:p-6 border-r border-juju-border/50">
-                  <p className="text-sm text-juju-gray line-through decoration-juju-danger/30">
-                    {row.them}
-                  </p>
-                </div>
-                <div className="p-4 md:p-6">
-                  <p className="text-sm text-juju-light">{row.us}</p>
-                </div>
+            <Reveal key={i} delay={i * 0.04}>
+              <div className="grid grid-cols-2 py-4 border-b border-juju-ink/6 last:border-b-0">
+                <p className="text-sm text-juju-ink-muted/40 font-light line-through decoration-juju-danger/20">
+                  {row.them}
+                </p>
+                <p className="text-sm text-juju-ink font-light">
+                  {row.us}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -92,13 +86,12 @@ export default function WhyDifferent() {
 
         {/* Pull quote */}
         <Reveal delay={0.3}>
-          <div className="mt-20 max-w-2xl mx-auto text-center">
-            <blockquote className="font-serif text-2xl md:text-3xl text-juju-light leading-relaxed italic">
+          <div className="mt-24 max-w-xl">
+            <blockquote className="font-display text-2xl md:text-3xl text-juju-ink font-light leading-relaxed italic">
               &ldquo;A system that knows what it knows —
-              <br />
               and what it doesn&rsquo;t.&rdquo;
             </blockquote>
-            <div className="mt-6 w-12 h-px bg-juju-signal/30 mx-auto" />
+            <div className="mt-6 w-10 h-px bg-juju-ink/10" />
           </div>
         </Reveal>
       </div>

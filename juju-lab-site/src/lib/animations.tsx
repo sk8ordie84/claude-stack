@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useInView, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 
 /* ── Reveal on Scroll ── */
 export function Reveal({
@@ -18,13 +18,13 @@ export function Reveal({
   once?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "-80px" });
+  const isInView = useInView(ref, { once, margin: "-60px" });
 
   const offsets = {
-    up: { y: 40 },
-    down: { y: -40 },
-    left: { x: 40 },
-    right: { x: -40 },
+    up: { y: 30 },
+    down: { y: -30 },
+    left: { x: 30 },
+    right: { x: -30 },
     none: {},
   };
 
@@ -34,7 +34,7 @@ export function Reveal({
       initial={{ opacity: 0, ...offsets[direction] }}
       animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...offsets[direction] }}
       transition={{
-        duration: 0.8,
+        duration: 0.9,
         delay,
         ease: [0.25, 0.1, 0.25, 1],
       }}
@@ -49,14 +49,14 @@ export function Reveal({
 export function StaggerContainer({
   children,
   className = "",
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
 }: {
   children: ReactNode;
   className?: string;
   staggerDelay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
 
   const containerVariants: Variants = {
     hidden: {},
@@ -89,12 +89,12 @@ export function StaggerItem({
   className?: string;
 }) {
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.8,
         ease: [0.25, 0.1, 0.25, 1],
       },
     },
@@ -104,30 +104,6 @@ export function StaggerItem({
     <motion.div variants={itemVariants} className={className}>
       {children}
     </motion.div>
-  );
-}
-
-/* ── Parallax Wrapper ── */
-export function Parallax({
-  children,
-  speed = 0.5,
-  className = "",
-}: {
-  children: ReactNode;
-  speed?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, speed * -100]);
-
-  return (
-    <div ref={ref} className={className}>
-      <motion.div style={{ y }}>{children}</motion.div>
-    </div>
   );
 }
 
@@ -178,34 +154,5 @@ export function FadeRule({ className = "" }: { className?: string }) {
     <Reveal className={className}>
       <div className="section-divider w-full" />
     </Reveal>
-  );
-}
-
-/* ── Text Reveal (character by character) ── */
-export function TextReveal({
-  text,
-  className = "",
-  charDelay = 0.02,
-}: {
-  text: string;
-  className?: string;
-  charDelay?: number;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
-
-  return (
-    <span ref={ref} className={className}>
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.1, delay: i * charDelay }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
   );
 }

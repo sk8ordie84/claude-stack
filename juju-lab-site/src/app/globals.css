@@ -1,25 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Color Tokens ── */
-  --color-juju-black: #08090c;
-  --color-juju-charcoal: #0e1015;
-  --color-juju-dark: #13151b;
-  --color-juju-panel: #181b23;
-  --color-juju-border: #1e2230;
-  --color-juju-muted: #2a2e3b;
-  --color-juju-gray: #6b7084;
-  --color-juju-silver: #9499ae;
-  --color-juju-light: #c8ccd8;
-  --color-juju-white: #e8eaf0;
-  --color-juju-pure: #f4f5f7;
-  --color-juju-signal: #3dd68c;
-  --color-juju-signal-dim: #1a5c3d;
-  --color-juju-caution: #e8a838;
-  --color-juju-danger: #e05454;
-  --color-juju-blue: #4a8fe8;
+  /* ── Warm Ink Palette ── */
+  --color-juju-black: #0b0b09;
+  --color-juju-charcoal: #111110;
+  --color-juju-dark: #171715;
+  --color-juju-panel: #1c1c19;
+  --color-juju-border: #28271f;
+  --color-juju-muted: #38362c;
+  --color-juju-gray: #7a7668;
+  --color-juju-silver: #9e9a8c;
+  --color-juju-light: #c8c3b4;
+  --color-juju-white: #e4e0d4;
+  --color-juju-pure: #f0ece4;
+
+  /* ── Paper / Light Mode Tokens ── */
+  --color-juju-paper: #f0ece4;
+  --color-juju-paper-warm: #e8e3d8;
+  --color-juju-ink: #1c1b17;
+  --color-juju-ink-light: #3a382f;
+  --color-juju-ink-muted: #6b675a;
+
+  /* ── Signal (restrained) ── */
+  --color-juju-signal: #7a9e87;
+  --color-juju-signal-dim: #3d5446;
+  --color-juju-caution: #c4a254;
+  --color-juju-danger: #b85c5c;
 
   /* ── Font Families ── */
+  --font-display: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
   --font-serif: "Instrument Serif", Georgia, serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", monospace;
@@ -32,7 +41,7 @@
 }
 
 ::selection {
-  background: rgba(61, 214, 140, 0.18);
+  background: rgba(122, 158, 135, 0.2);
   color: var(--color-juju-pure);
 }
 
@@ -49,110 +58,51 @@ body {
 
 /* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-juju-black);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-juju-muted);
-  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-juju-gray);
 }
 
-/* ── Utility Classes ── */
-.text-gradient-signal {
-  background: linear-gradient(135deg, var(--color-juju-signal), var(--color-juju-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ── Section Divider ── */
+.section-divider {
+  height: 1px;
+  background: var(--color-juju-border);
 }
 
-.border-gradient {
-  border-image: linear-gradient(
-    180deg,
-    var(--color-juju-border) 0%,
-    transparent 100%
-  ) 1;
+/* ── Paper Section ── */
+.paper-section {
+  background: var(--color-juju-paper);
+  color: var(--color-juju-ink);
+}
+.paper-section ::selection {
+  background: rgba(122, 158, 135, 0.2);
+  color: var(--color-juju-ink);
 }
 
-/* ── Noise Texture Overlay ── */
-.noise-overlay::before {
+/* ── Subtle noise for paper texture ── */
+.paper-texture::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
   pointer-events: none;
   z-index: 1;
 }
 
-/* ── Grid Pattern ── */
-.grid-pattern {
-  background-image:
-    linear-gradient(var(--color-juju-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-juju-border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.3;
-}
-
-/* ── Scanline Effect ── */
-.scanline::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(8, 9, 12, 0.03) 2px,
-    rgba(8, 9, 12, 0.03) 4px
-  );
-  pointer-events: none;
-}
-
-/* ── Signal Pulse ── */
-@keyframes signal-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.animate-signal-pulse {
-  animation: signal-pulse 2.4s ease-in-out infinite;
-}
-
-@keyframes slow-drift {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-8px) translateX(4px); }
-  50% { transform: translateY(-4px) translateX(-6px); }
-  75% { transform: translateY(-12px) translateX(2px); }
-}
-
-.animate-slow-drift {
-  animation: slow-drift 20s ease-in-out infinite;
-}
-
-/* ── Glow ── */
-.glow-signal {
-  box-shadow: 0 0 40px rgba(61, 214, 140, 0.06), 0 0 80px rgba(61, 214, 140, 0.03);
-}
-
-.glow-signal-strong {
-  box-shadow: 0 0 20px rgba(61, 214, 140, 0.12), 0 0 60px rgba(61, 214, 140, 0.06);
-}
-
-/* ── Section Divider ── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-juju-border) 20%,
-    var(--color-juju-muted) 50%,
-    var(--color-juju-border) 80%,
-    transparent 100%
-  );
+/* ── Stamp/Label Detail ── */
+.label-stamp {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-juju-gray);
 }
