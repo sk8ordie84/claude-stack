@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Warm Ink Palette ── */
+  --color-juju-black: #0b0b09;
+  --color-juju-charcoal: #111110;
+  --color-juju-dark: #171715;
+  --color-juju-panel: #1c1c19;
+  --color-juju-border: #28271f;
+  --color-juju-muted: #38362c;
+  --color-juju-gray: #7a7668;
+  --color-juju-silver: #9e9a8c;
+  --color-juju-light: #c8c3b4;
+  --color-juju-white: #e4e0d4;
+  --color-juju-pure: #f0ece4;
+
+  /* ── Paper / Light Mode Tokens ── */
+  --color-juju-paper: #f0ece4;
+  --color-juju-paper-warm: #e8e3d8;
+  --color-juju-ink: #1c1b17;
+  --color-juju-ink-light: #3a382f;
+  --color-juju-ink-muted: #6b675a;
+
+  /* ── Signal (restrained) ── */
+  --color-juju-signal: #7a9e87;
+  --color-juju-signal-dim: #3d5446;
+  --color-juju-caution: #c4a254;
+  --color-juju-danger: #b85c5c;
+
+  /* ── Font Families ── */
+  --font-display: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+}
+
+/* ── Base Styles ── */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(122, 158, 135, 0.2);
+  color: var(--color-juju-pure);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-juju-black);
+  color: var(--color-juju-white);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-juju-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-juju-muted);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-juju-gray);
+}
+
+/* ── Section Divider ── */
+.section-divider {
+  height: 1px;
+  background: var(--color-juju-border);
+}
+
+/* ── Paper Section ── */
+.paper-section {
+  background: var(--color-juju-paper);
+  color: var(--color-juju-ink);
+}
+.paper-section ::selection {
+  background: rgba(122, 158, 135, 0.2);
+  color: var(--color-juju-ink);
+}
+
+/* ── Subtle noise for paper texture ── */
+.paper-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Stamp/Label Detail ── */
+.label-stamp {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-juju-gray);
+}
